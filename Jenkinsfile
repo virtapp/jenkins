@@ -25,6 +25,7 @@ spec:
         }
         stage('helm install simple-web'){
             steps{
+                sh 'helm -n yevgeni ls
                 sh 'helm -n yevgeni delete --purge simple-web || true'
                 sh 'helm -n yevgeni install simple-web simple-web'
             }
