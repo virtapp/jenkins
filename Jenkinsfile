@@ -25,7 +25,7 @@ spec:
         }
         stage('helm install simple-web'){
             steps{
-                sh 'helm upgrade --install simple-web simple-web -n yevgeni'
+                sh 'helm upgrade simple-web simple-web -n yevgeni'
             }
         }
     }
