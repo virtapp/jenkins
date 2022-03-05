@@ -1,21 +1,15 @@
 pipeline {
     agent {
-        any {
-            yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: shell
-    image: jayagrawaldocker/jenkins:0.4
-    command:
-    - sleep
-    args:
-    - infinity
-'''
-            defaultContainer 'shell'
-        }
-    }
+         kubernetes {
+                 containerTemplate {
+                   name 'helm'
+                   image 'lachlanevenson/k8s-helm:v3.1.1'
+                   ttyEnabled true
+                  command 'cat'
+              }
+            }
+         }
+                     
     stages {
         stage('version cheak') {
             steps {
