@@ -1,0 +1,28 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+ namespace: yevgeni
+ name: simple-web-scaledobject
+spec:
+ scaleTargetRef:
+   kind:          Deployment
+   name:          simple-web
+ pollingInterval: 20
+ minReplicaCount: 1
+ maxReplicaCount: 10
+ triggers:
+  - type: cpu
+    metadata:
+      type: Utilization
+      value: "70"
+  - type: memory
+    metadata:
+      type: Utilization
+      value: "50"
+ triggers:
+  - type: cron
+    metadata:
+      timezone: Asia/Jerusalem
+      start: 0 8 * * *
+      end: 55 11 * * *
+      desiredReplicas: "10"
